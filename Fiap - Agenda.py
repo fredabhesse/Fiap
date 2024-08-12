@@ -3,6 +3,9 @@
 
 # definindo funções necessárias
 
+# Descrição: cria uma sublista de usuários para busca de contatos através do índice
+# Nome: get_user
+# Tipo: Procedimento
 def get_user():
     lista = []
     for elem in listaUsuario:
@@ -15,22 +18,32 @@ def get_user():
     return index
 
 
-def catch_user():
+# Descrição: Exibe os dados de um usuário através do número de índice
+# Nome: show_user
+# Tipo: Procedimento
+def show_user():
     index = get_user()
     i = listaUsuario[index]
     print(f"Nome.....:{i[0]}\nCelular..:{i[1]}\nE-mail...:{i[2]}\n--------------------------")
     return index
 
 
+# Descrição: Aguarda o input de qualquer dado para exibir o menu principal
+# Nome: wait_prompt()
+# Tipo: Procedimento
 def wait_prompt():
     input("Pressione qualquer tecla para continuar")
     print("\n" * 30)
     menu()
 
 
+# Descrição: Exibe o menu de opções
+# Nome: menu()
+# Tipo: Procedimento
 def menu():
-    select = int(input("**********M E N U **********\n1 - Adicionar novo contato\n2 - Editar contato\n3 - Pesquisar "
-                       "contato\n4 - Lista de contatos\n5 - Apagar um contato\n6 - Sair\nEscolha um opção:_"))
+    select = int(input("\n ********** M E N U **********\n1 - Adicionar novo contato\n2 - Editar contato\n3 - "
+                       "Pesquisar contato\n4 - Lista de contatos\n5 - Apagar um contato\n6 - Sair\n\n"
+                       "Escolha um opção: "))
     if select == 1:  # Adicionar
         print("\n" * 30)
         add_user()
@@ -40,7 +53,7 @@ def menu():
     elif select == 3:  # Pesquisar
         print("\n" * 30)
         print("---------MODO DE PESQUISA")
-        catch_user()
+        show_user()
         wait_prompt()
         menu()
     elif select == 4:  # Listar
@@ -54,10 +67,13 @@ def menu():
         print("\n" * 30)
         print("OBRIGADO POR UTILIZAR NOSSA AGENDA")
     else:
-        print("\n" * 30)
+        print("Opção não existe")
         wait_prompt()
 
 
+# Descrição: Adiciona usuários
+# Nome: add_user()
+# Tipo: Procedimento
 def add_user():
     print("---------CADASTRO DE NOVO USUÁRIO:")
     nome = str(input("Nome.....:"))
@@ -69,9 +85,12 @@ def add_user():
     wait_prompt()
 
 
+# Descrição: Edita usuários existentes
+# Nome: edit_user()
+# Tipo: Procedimento
 def edit_user():
     print("---------MODO DE EDIÇÃO")
-    index = catch_user()
+    index = show_user()
     updatefield = int(input("\nSelecione o dado que gostaria de editar\n1 - Nome\n2 - Celular\n3 - E-mail\nOpção "
                             "desejada_"))
     if updatefield == 1:
@@ -93,8 +112,11 @@ def edit_user():
     return listaUsuario
 
 
+# Descrição: Deleta usuários
+# Nome: delete_user()
+# Tipo: Procedimento
 def delete_user():
-    index = catch_user()
+    index = show_user()
     option = (str(input("Deletar o usuário selecionado? Digite S para SIM, N para não")))
     while option not in ['S', 's', 'N', 'n']:
         print("Opção digitada inválida")
@@ -109,6 +131,9 @@ def delete_user():
         wait_prompt()
 
 
+# Descrição: Lista todas as informações de contatos da agenda
+# Nome: list_users()
+# Tipo: Procedimento
 def list_users():
     print("---------CONTATOS DA AGENDA:")
     for elem in listaUsuario:
@@ -120,4 +145,6 @@ def list_users():
 listaUsuario = [["Edson", "119543-5567", "eds@hotmail.com"],
                 ["Maria", "1193322-3456", "maria@gmail.com"],
                 ["Adriano", "1198786-8584", "adriano@ig.com.br"]]
-menu()
+
+while True:
+    menu()
